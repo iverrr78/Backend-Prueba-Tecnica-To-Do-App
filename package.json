@@ -1,0 +1,43 @@
+{
+  "name": "backend-prueba-tecnica-to-do-app",
+  "version": "1.0.0",
+  "description": "This repository contains the backend code of a To-Do web app, in this app users are able to create accounts and log into them, once the have an account they can visualize, create, edit and delete tasks, additionally the can indicate when a task is completed.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iverrr78/Backend-Prueba-Tecnica-To-Do-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iverrr78/Backend-Prueba-Tecnica-To-Do-App/issues"
+  },
+  "homepage": "https://github.com/iverrr78/Backend-Prueba-Tecnica-To-Do-App#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "transform": {}
+  }
+}
