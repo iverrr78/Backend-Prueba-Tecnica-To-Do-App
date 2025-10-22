@@ -1,5 +1,6 @@
-import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
+import pkg from 'sequelize';
+const { Sequelize } = pkg;
 
 dotenv.config();
 
@@ -14,7 +15,7 @@ const sequelize = new Sequelize({
 });
 
 // Test the connection
-const testConnection = async () => {
+/*const testConnection = async () => {
   try {
     await sequelize.authenticate();
     console.log('✅ Database connection has been established successfully.');
@@ -24,6 +25,6 @@ const testConnection = async () => {
 };
 
 // Initialize database connection
-testConnection();
+testConnection();*/
 
 export {sequelize};

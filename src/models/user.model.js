@@ -1,4 +1,4 @@
-import { DataTypes } from 'sequelize';
+import DataTypes from 'sequelize';
 import {sequelize} from '../../database.js';
 
 // Define User model

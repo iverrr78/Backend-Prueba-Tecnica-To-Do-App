@@ -1,4 +1,5 @@
-import {Router} from 'express';
+import { Router } from 'express';
+import { authController } from '../controllers/auth.controllers.js';
 
 const routes = {
     Register: '/register',
@@ -8,8 +9,17 @@ const routes = {
 
 const authRouter = Router();
 
-authRouter.post(routes.Register, {message: "Register"});
-authRouter.post(routes.Login, {message: "Login"});
-authRouter.post(routes.Logout, {message: "Logout"});
+authRouter.post(routes.Register, (req,res)=>{
+    authController.Register(req,res)
+});
+authRouter.post(routes.Login, (req,res)=>{
+    authController.Login(req,res)
+});
+authRouter.post(routes.Logout, (req,res)=>{
+    res.json({message: "Logout"})
+});
+authRouter.delete('/:id', (req, res) => {
+    authController.deleteUser(req, res);
+});
 
 export {authRouter};
