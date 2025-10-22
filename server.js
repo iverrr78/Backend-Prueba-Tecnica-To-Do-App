@@ -3,8 +3,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import {sequelize} from './database.js';
-import User from './src/models/user.model.js';
-import Task from './src/models/task.model.js';
 
 // Initialize environment variables
 dotenv.config();
