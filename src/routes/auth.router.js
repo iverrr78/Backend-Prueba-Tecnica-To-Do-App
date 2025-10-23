@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { authController } from '../controllers/auth.controllers.js';
-
+import { validationhandler } from '../middleware/validation.handler.js';
+import { registerSchema, loginSchema } from '../dot/validator.js';
 const routes = {
     Register: '/register',
     Login: '/login',
@@ -9,14 +10,11 @@ const routes = {
 
 const authRouter = Router();
 
-authRouter.post(routes.Register, (req,res)=>{
+authRouter.post(routes.Register, validationhandler(registerSchema), (req,res)=>{
     authController.Register(req,res)
 });
-authRouter.post(routes.Login, (req,res)=>{
+authRouter.post(routes.Login, validationhandler(loginSchema), (req,res)=>{
     authController.Login(req,res)
-});
-authRouter.post(routes.Logout, (req,res)=>{
-    res.json({message: "Logout"})
 });
 authRouter.delete('/:id', (req, res) => {
     authController.deleteUser(req, res);
