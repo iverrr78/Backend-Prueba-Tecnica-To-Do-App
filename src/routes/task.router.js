@@ -1,33 +1,34 @@
 import { Router } from 'express';
 import { authenticateToken } from '../middleware/Authentication.handler.js';
+import { taskController } from '../controllers/task.controllers.js';
 
 // Define routes
 const routes = {
     getTasks: '/',
     getTaskById: '/:id',
     createTask: '/create',
-    updateTask: 'update/:id',
-    deleteTask: 'delete/:id'
+    updateTask: '/update/:id',
+    deleteTask: '/delete/:id'
 }
 
 // Create router
 const taskRouter = Router();
 
 // Define routes
-taskRouter.get(routes.getTasks, (req, res) => {
-    res.json({message: "getTasks"});
+taskRouter.get(routes.getTasks, authenticateToken, (req, res) => {
+    taskController.GetTasks(req,res);
 });
-taskRouter.get(routes.getTaskById, (req, res) => {
-    res.json({message: "getTaskById"});
+taskRouter.get(routes.getTaskById, authenticateToken, (req, res) => {
+    taskController.GetTaskById(req,res);
 });
 taskRouter.post(routes.createTask, authenticateToken, (req, res) => {
-    res.json({message: "createTask"});
+    taskController.CreateTask(req,res);
 });
-taskRouter.put(routes.updateTask, authenticateToken, (req, res) => {
-    res.json({message: "updateTask"});
+taskRouter.patch(routes.updateTask, authenticateToken, (req, res) => {
+    taskController.UpdateTask(req,res);
 });
 taskRouter.delete(routes.deleteTask, authenticateToken, (req, res) => {
-    res.json({message: "deleteTask"});
+    taskController.DeleteTask(req,res);
 });
 
 export {taskRouter};

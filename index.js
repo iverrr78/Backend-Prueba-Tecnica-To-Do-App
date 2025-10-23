@@ -6,7 +6,7 @@ import morgan from 'morgan';
 
 // Main function to start the server
 const main = async () => {
-    await sequelize.sync({force: true});
+    await sequelize.sync({force: false});
     Routes(server);
     server.use(morgan('dev'));
     server.listen(process.env.PORT, () => {

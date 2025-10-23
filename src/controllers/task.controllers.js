@@ -1,29 +1,93 @@
 import {Task} from '../models/asociations.js';
 
 async function CreateTask(req,res){
-    res,status(201).json({message: "Task created successfully"});
+    const {title, description} = req.body;
+    const userId = req.user.id;
+    console.log("userId:", userId);
+
+    try{
+        const task = await Task.create({
+        title: title,
+        description: description,
+        completed: false,
+        userId: userId
+        });
+
+        res.status(201).json({
+            message: "Task created successfully",
+            task: task
+        });
+    } catch(err) {
+        console.log("error:", err.message);
+        return res.status(500).json({message: err.message });
+    }
 }
 
 async function GetTasks(req,res){
-    res.status(200).json({message: "Tasks retrieved successfully"});
+    const userId = req.user.id;
+
+    try {
+        const tasks = await Task.findAll({ where: { UserId: userId } });
+        res.status(200).json({
+            message: "Tasks retrieved successfully",
+            tasks: tasks
+        });
+    } catch(err) {
+        console.log("error:", err.message);
+        return res.status(500).json({message: err.message });
+    }
+    //res.status(200).json({message: "Tasks retrieved successfully"});
 }
 
-async function GetTaskById(req,res){
+/*async function GetTaskById(req,res){
+    const {id} = req.params;
     res.status(200).json({message: "Task retrieved successfully"});
-}
+}*/
 
 async function UpdateTask(req,res){
-    res.status(200).json({message: "Task updated successfully"});
+    const {id} = req.params;
+
+    try{
+        const task = await Task.findByPk(id);
+        if(!task){
+            return res.status(404).json({message: "Task not found"});
+        }
+
+        const {title, description, completed} = req.body;
+
+        await task.update({
+            title: title !== undefined ? title : task.title,
+            description: description !== undefined ? description :  task.description,
+            completed: completed !== undefined ? completed : task.completed
+        });
+
+        res.status(200).json({message: "Task updated successfully"});
+    } catch(err){
+        console.log("error:", err.message);
+        return res.status(500).json({message: err.message });
+    }    
 }
 
 async function DeleteTask(req,res){
-    res.status(200).json({message: "Task deleted successfully"});
+    const {id} = req.params;
+
+    if (!id) {
+        return res.status(400).json({ message: "Task ID is required" });
+    }
+
+    try{
+        await Task.destroy({ where: { id: id } });
+        res.status(200).json({message: "Task deleted successfully"});
+    } catch(err){
+        console.log("error:", err.message);
+        return res.status(500).json({message: err.message });
+    }
 }
 
 const taskController = {
     CreateTask: CreateTask,
     GetTasks: GetTasks,
-    GetTaskById: GetTaskById,
+    //GetTaskById: GetTaskById,
     UpdateTask: UpdateTask,
     DeleteTask: DeleteTask
 }
