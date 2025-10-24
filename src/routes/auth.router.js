@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { authController } from '../controllers/auth.controllers.js';
 import { validationhandler } from '../middleware/validation.handler.js';
 import { registerSchema, loginSchema } from '../dot/validator.js';
+
 const routes = {
     Register: '/register',
     Login: '/login',

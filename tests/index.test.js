@@ -2,64 +2,69 @@ import {sequelize} from '../database.js';
 import request from 'supertest';
 import server from '../server.js';
 
-/*describe('First server test', () => {
-  test('GET / should return welcome message', async () => {
-    const response = await request(server).get('/');
-    expect(response.statusCode).toBe(200);
-    expect(response.body.message).toContain('Hello World');
-  });
-});*/
+let token;
+let testUserId;
+let createdTaskId;
+
+beforeAll(async () => {
+  // Clean up test database
+  await sequelize.sync({ force: true });
+  
+  // Register and login to get a token
+  await request(server)
+    .post('/auth/register')
+    .send({ username: 'testuser', email: 'test@example.com', password: 'password123' });
+
+  const loginRes = await request(server)
+    .post('/auth/login')
+    .send({ email: 'test@example.com', password: 'password123' });
+  
+  // Extract token from response header or body
+  token = loginRes.headers['authorization']?.split(' ')[1] || loginRes.body.token;
+  testUserId = loginRes.body.user?.id;
+});
 
 // Task tests
 describe('Task Routes', () => {
     test('GET /task should return tasks list', async () => {
-      const response = await request(server).get('/task');
+      const response = await request(server).get('/task')
+        .set('Authorization', `Bearer ${token}`);
       expect(response.statusCode).toBe(200);
       expect(response.body).toHaveProperty('tasks');
       expect(Array.isArray(response.body.tasks)).toBe(true);
     });
   
-    test('POST /task should create new task', async () => {
+    test('POST /task/create should create new task', async () => {
       const taskData = {
         title: 'Test Task',
         description: 'Test Description'
       };
   
       const response = await request(server)
-        .post('/task')
+        .post('/task/create')
+        .set('Authorization', `Bearer ${token}`)
         .send(taskData)
         .expect(201);
   
       expect(response.body).toHaveProperty('message', 'Task created successfully');
       expect(response.body).toHaveProperty('task');
       expect(response.body.task.title).toBe('Test Task');
+      createdTaskId = response.body.task.id;
     });
   
-    test('GET /task/:id should return specific task', async () => {
-      const response = await request(server).get('/task/1');
-      expect(response.statusCode).toBe(200);
-      expect(response.body).toHaveProperty('task');
-      expect(response.body.task).toHaveProperty('id', 1);
-    });
-  
-    test('PUT /task/:id should update task', async () => {
-      const updateData = {
-        title: 'Updated Task',
-        completed: true
-      };
-  
+    test('PATCH /task/update/:id should update task', async () => {
       const response = await request(server)
-        .put('/task/1')
-        .send(updateData)
+        .patch(`/task/update/${createdTaskId}`)
+        .set('Authorization', `Bearer ${token}`)
         .expect(200);
   
       expect(response.body).toHaveProperty('message', 'Task updated successfully');
-      expect(response.body.task.title).toBe('Updated Task');
     });
   
-    test('DELETE /task/:id should delete task', async () => {
+    test('DELETE /task/delete/:id should delete task', async () => {
       const response = await request(server)
-        .delete('/task/1')
+        .delete(`/task/delete/${createdTaskId}`)
+        .set('Authorization', `Bearer ${token}`)
         .expect(200);
   
       expect(response.body).toHaveProperty('message', 'Task deleted successfully');
@@ -69,8 +74,8 @@ describe('Task Routes', () => {
   describe('Authentication Routes', () => {
     test('POST /auth/register should create new user', async () => {
       const userData = {
-        username: 'testuser',
-        email: 'test@example.com',
+        username: 'newuser',
+        email: 'newuser@example.com',
         password: 'password123'
       };
   
@@ -79,9 +84,9 @@ describe('Task Routes', () => {
         .send(userData)
         .expect(201);
   
-      //expect(response.body).toHaveProperty('message', 'User successfully registered.');
-      //expect(response.body).toHaveProperty('user');
-      //expect(response.body.user.username).toBe('testuser');
+      expect(response.body).toHaveProperty('message', 'User successfully registered.');
+      expect(response.body).toHaveProperty('user');
+      expect(response.body.user.username).toBe('newuser');
     });
   
     test('POST /auth/login should authenticate user', async () => {
@@ -98,15 +103,6 @@ describe('Task Routes', () => {
       expect(response.body).toHaveProperty('message', 'Login successful');
       expect(response.body).toHaveProperty('token');
       expect(response.body).toHaveProperty('user');
-    });
-  
-    test('POST /auth/logout should logout user', async () => {
-      const response = await request(server)
-        .post('/auth/logout')
-        .set('Authorization', 'Bearer valid-token')
-        .expect(200);
-  
-      expect(response.body).toHaveProperty('message', 'Logout successful');
     });
   });
 

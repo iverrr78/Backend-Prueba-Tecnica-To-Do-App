@@ -14,17 +14,4 @@ const sequelize = new Sequelize({
   dialect: 'mysql'
 });
 
-// Test the connection
-/*const testConnection = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('✅ Database connection has been established successfully.');
-  } catch (error) {
-    console.error('❌ Unable to connect to the database:', error);
-  }
-};
-
-// Initialize database connection
-testConnection();*/
-
 export {sequelize};

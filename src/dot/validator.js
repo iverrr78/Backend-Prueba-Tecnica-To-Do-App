@@ -23,10 +23,6 @@ const createTaskSchema = joi.object({
     description: description.required()
 });
 
-const updateTaskSchema = joi.object({
-    title: title,
-    description: description,
-    completed: completed
-});
+const singleid = id;
 
-export {registerSchema, loginSchema, createTaskSchema, updateTaskSchema};
+export {registerSchema, loginSchema, createTaskSchema, singleid};

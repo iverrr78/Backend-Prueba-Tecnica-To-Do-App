@@ -1,6 +1,6 @@
 function validateid(schema){
     return(req, res, next)=>{
-    const {error} = schema.validate(parseInt(req.query.id));
+    const {error} = schema.validate(parseInt(req.params.id));
 
     if(error){
         next(error);
@@ -13,14 +13,7 @@ function validateid(schema){
 
 function validationhandler(schema){
     return(req, res, next)=>{
-        let data
-
-        if(req.body.body == undefined){
-            data = req.body;
-        } else {
-            data = JSON.parse(req.body.body);
-        }
-
+        const data = req.body;
 
         const {error} = schema.validate(data);
 

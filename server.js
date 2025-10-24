@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import {sequelize} from './database.js';
+import {Routes} from './src/routes/routes.js';
 
 // Initialize environment variables
 dotenv.config();
@@ -12,6 +13,7 @@ const server = express();
 server.use(cors());
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
+
 // Initialize database tables
 const initializeDatabase = async () => {
   try {
@@ -28,5 +30,8 @@ initializeDatabase();
 server.get('/', (req, res) => {
     res.json({ message: 'Hello World' });
 });
+
+// Mount routes
+Routes(server);
 
 export default server;
