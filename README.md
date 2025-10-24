@@ -4,7 +4,7 @@
 
 ---
 
-## English Version
+## 🇬🇧 English Version
 
 A RESTful API backend for a To-Do application built with Node.js, Express, and MySQL. This application allows users to create accounts, authenticate, and manage their personal tasks.
 
