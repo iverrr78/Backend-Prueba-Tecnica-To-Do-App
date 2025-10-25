@@ -18,7 +18,6 @@ const sequelize = new Sequelize(process.env.STACKHERO_MYSQL_DATABASE_URL, {
   dialect: 'mysql',
   dialectOptions: {
     ssl: {
-      require: true,
       rejectUnauthorized: false
     }
   },
