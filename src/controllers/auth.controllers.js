@@ -2,6 +2,7 @@ import {User} from '../models/asociations.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
+// Controller to register a new user
 async function Register(req,res){
     const {username, email, password} = req.body;
 
@@ -41,6 +42,7 @@ async function Register(req,res){
     }
 }
 
+// Controller to log in an existing user
 async function Login(req,res){
     const {email, password} = req.body;
 
@@ -85,20 +87,8 @@ async function Login(req,res){
     }
 }
 
-async function deleteUser(req, res) {
-    const { id } = req.params;
-
-    try {
-        User.destroy({ where: { id } });
-        res.status(200).json({ message: 'User deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: 'Error deleting user', error: error.message });
-    }
-}
-
 const authController = {
     Register: Register,
-    deleteUser: deleteUser,
     Login: Login
 }
 

@@ -1,5 +1,6 @@
 import {Task} from '../models/asociations.js';
 
+// Controller to create a new task
 async function CreateTask(req,res){
     const {title, description} = req.body;
     const userId = req.user.id;
@@ -22,6 +23,7 @@ async function CreateTask(req,res){
     }
 }
 
+// Controller to get all tasks for the authenticated user
 async function GetTasks(req,res){
     const userId = req.user.id;
 
@@ -37,6 +39,7 @@ async function GetTasks(req,res){
     }
 }
 
+// Controller to update a task's status to completed
 async function UpdateTask(req,res){
     const {id} = req.params;
 
@@ -57,6 +60,7 @@ async function UpdateTask(req,res){
     }    
 }
 
+// Controller to delete a task
 async function DeleteTask(req,res){
     const {id} = req.params;
 
