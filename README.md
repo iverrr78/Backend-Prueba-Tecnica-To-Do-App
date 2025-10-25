@@ -52,6 +52,13 @@ The technology stack and project architecture were chosen based on familiarity a
   - **Joi for Validation**: Provides robust schema validation with clear error messages
   - **Jest & Supertest**: Comprehensive testing tools that work seamlessly with Node.js
 
+### Code Language
+All code, including comments, variable names, function names, and documentation within the code, is written in **English**. This decision was made because:
+- It's how I was taught at university
+- English is the industry standard for programming
+- It ensures better collaboration and code readability for international teams
+- It aligns with best practices in software development
+
 ## �📁 Project Structure
 
 ```
@@ -382,6 +389,13 @@ El stack tecnológico y la arquitectura del proyecto fueron elegidos basándose 
   - **JWT para Autenticación**: Estándar de la industria para autenticación sin estado en APIs REST
   - **Joi para Validación**: Proporciona validación de esquemas robusta con mensajes de error claros
   - **Jest & Supertest**: Herramientas de testing completas que funcionan perfectamente con Node.js
+
+### Idioma del Código
+Todo el código, incluyendo comentarios, nombres de variables, nombres de funciones y documentación dentro del código, está escrito en **inglés**. Esta decisión se tomó porque:
+- Es como me enseñaron en la universidad
+- El inglés es el estándar de la industria para programación
+- Asegura mejor colaboración y legibilidad del código para equipos internacionales
+- Se alinea con las mejores prácticas en desarrollo de software
 
 ## �📁 Estructura del Proyecto
 
