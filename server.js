@@ -10,7 +10,9 @@ dotenv.config();
 
 // Create server instance
 const server = express();
-server.use(cors());
+server.use(cors({
+  origin: 'https://frontend-prueba-tecnica-to-to-app.vercel.app'
+}));
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
