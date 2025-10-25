@@ -38,7 +38,21 @@ A RESTful API backend for a To-Do application built with Node.js, Express, and M
 - **Testing**: Jest & Supertest
 - **Development**: Nodemon, Morgan (logging)
 
-## 📁 Project Structure
+## � Technical Decisions
+
+The technology stack and project architecture were chosen based on familiarity and proven reliability:
+
+- **Node.js & Express.js**: Selected due to prior experience with these technologies, which allows for faster development and easier maintenance.
+
+- **Project Structure**: The MVC-inspired architecture (controllers, models, routes, middleware) was chosen due to prior experience with it.
+
+- **Libraries & Tools**: 
+  - **Sequelize ORM**: Simplifies database operations and provides easy migration management
+  - **JWT for Authentication**: Industry-standard for stateless authentication in REST APIs
+  - **Joi for Validation**: Provides robust schema validation with clear error messages
+  - **Jest & Supertest**: Comprehensive testing tools that work seamlessly with Node.js
+
+## �📁 Project Structure
 
 ```
 Backend-Prueba-Tecnica-To-Do-App/
@@ -355,7 +369,21 @@ Una API RESTful backend para una aplicación de tareas (To-Do) construida con No
 - **Testing**: Jest & Supertest
 - **Desarrollo**: Nodemon, Morgan (logging)
 
-## 📁 Estructura del Proyecto
+## � Decisiones Técnicas
+
+El stack tecnológico y la arquitectura del proyecto fueron elegidos basándose en la familiaridad y confiabilidad probada:
+
+- **Node.js & Express.js**: Seleccionados debido a la experiencia previa con estas tecnologías, lo que permite un desarrollo más rápido y un mantenimiento más sencillo.
+
+- **Estructura del Proyecto**: La arquitectura inspirada en MVC (controladores, modelos, rutas, middleware) fue elegida tambien debido a experiencia previa con esta.
+
+- **Librerías y Herramientas**:
+  - **Sequelize ORM**: Simplifica las operaciones de base de datos y proporciona gestión fácil de migraciones
+  - **JWT para Autenticación**: Estándar de la industria para autenticación sin estado en APIs REST
+  - **Joi para Validación**: Proporciona validación de esquemas robusta con mensajes de error claros
+  - **Jest & Supertest**: Herramientas de testing completas que funcionan perfectamente con Node.js
+
+## �📁 Estructura del Proyecto
 
 ```
 Backend-Prueba-Tecnica-To-Do-App/
